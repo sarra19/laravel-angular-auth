@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">MyShop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Liens visibles uniquement si connecté -->
+      <ul class="navbar-nav me-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cart">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile">Profile</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        <!-- Logout visible uniquement si connecté -->
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link text-danger" (click)="logout()">Logout</a>
+        </li>
+
+        <!-- Login visible uniquement si pas connecté -->
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/signup">Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

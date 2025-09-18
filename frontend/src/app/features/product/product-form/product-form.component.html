@@ -1,0 +1,61 @@
+<div class="container mt-4">
+  <h2 *ngIf="!isEdit">Add Product</h2>
+  <h2 *ngIf="isEdit">Edit Product</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+ <div class="mb-3">
+  <label class="form-label">Name</label>
+  <input type="text" class="form-control" formControlName="name">
+  <div *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid" class="text-danger">
+    <small *ngIf="productForm.get('name')?.errors?.['required']">Name is required</small>
+    <small *ngIf="productForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</small>
+    <small *ngIf="productForm.get('name')?.errors?.['maxlength']">Name cannot exceed 255 characters</small>
+  </div>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Description</label>
+  <textarea class="form-control" formControlName="description"></textarea>
+  <div *ngIf="productForm.get('description')?.touched && productForm.get('description')?.invalid" class="text-danger">
+    <small *ngIf="productForm.get('description')?.errors?.['required']">Description is required</small>
+    <small *ngIf="productForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters</small>
+    <small *ngIf="productForm.get('description')?.errors?.['maxlength']">Description cannot exceed 1000 characters</small>
+  </div>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Price</label>
+  <input type="number" class="form-control" formControlName="price">
+  <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid" class="text-danger">
+    <small *ngIf="productForm.get('price')?.errors?.['required']">Price is required</small>
+    <small *ngIf="productForm.get('price')?.errors?.['min']">Price must be ≥ 0</small>
+    <small *ngIf="productForm.get('price')?.errors?.['pattern']">Price must be a valid number</small>
+  </div>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Stock</label>
+  <input type="number" class="form-control" formControlName="stock">
+  <div *ngIf="productForm.get('stock')?.touched && productForm.get('stock')?.invalid" class="text-danger">
+    <small *ngIf="productForm.get('stock')?.errors?.['required']">Stock is required</small>
+    <small *ngIf="productForm.get('stock')?.errors?.['min']">Stock must be ≥ 0</small>
+    <small *ngIf="productForm.get('stock')?.errors?.['pattern']">Stock must be an integer</small>
+  </div>
+</div>
+
+
+    <div class="mb-3">
+      <label class="form-label">Image</label>
+      <input type="file" class="form-control" (change)="onFileSelected($event)">
+      <div *ngIf="isEdit && productForm.value.image" class="mt-2">
+        <p>Current Image:</p>
+        <img [src]="productForm.value.image" alt="Product Image" class="img-thumbnail" width="150">
+      </div>
+    </div>
+
+    <button class="btn btn-success me-2" type="submit">Save</button>
+    <a routerLink="/products" class="btn btn-link">Cancel</a>
+
+  </form>
+</div>

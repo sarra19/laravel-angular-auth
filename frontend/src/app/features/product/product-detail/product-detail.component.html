@@ -1,0 +1,8 @@
+<div class="container mt-4" *ngIf="product">
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <p class="fw-bold">Price: {{ product.price | currency:'USD' }}</p>
+  <p>Stock: {{ product.stock }}</p>
+  <button class="btn btn-success" (click)="addToCart(product.id)">Add to Cart</button>
+  <a routerLink="/products" class="btn btn-link">Back</a>
+</div>
